@@ -2,10 +2,9 @@
   "name": "torn-discord-bot",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "scripts": {
-    "dev": "",
-    "build": "",
-    "preview": ""
+    "dev": "node ."
   },
   "dependencies": {
     "discord.js": "^14.11.0",

@@ -1,0 +1,14 @@
+{
+  "name": "torn-portal",
+  "version": "0.2.7",
+  "private": true,
+  "scripts": {
+    "dev": "",
+    "build": "",
+    "preview": ""
+  },
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1"
+  }
+}

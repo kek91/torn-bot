@@ -1,6 +1,6 @@
 {
-  "name": "torn-portal",
-  "version": "0.2.7",
+  "name": "torn-discord-bot",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "",

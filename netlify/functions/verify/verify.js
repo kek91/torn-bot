@@ -1,10 +1,11 @@
 const fetch = require('node-fetch')
-const {Client, Events, GatewayIntentBits} = require('discord.js');
+const {Client, Events, GatewayIntentBits, SlashCommandBuilder} = require('discord.js');
 require('dotenv').config()
 
 const handler = async function () {
 
     let token;
+    let output = {};
 
     if (process.env.TOKEN) {
         token = process.env.TOKEN;
@@ -14,11 +15,18 @@ const handler = async function () {
 
     const client = new Client({intents: [GatewayIntentBits.Guilds]});
 
+    client.login(token);
+
     client.once(Events.ClientReady, c => {
         console.log(`Ready! Logged in as ${c.user.tag}`);
+        output.discord = `Logged in as ${c.user.tag}`;
     });
 
-    client.login(token);
+    client.on('message', message => {
+        if (message.content.includes('changeNick')) {
+            client.setNickname({nick: message.content.replace('changeNick ', '')});
+        }
+    });
 
     try {
         const response = await fetch('https://icanhazdadjoke.com', {

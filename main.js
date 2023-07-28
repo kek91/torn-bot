@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, REST, Routes } = require('discord.js');
 const http = require("http");
 
 require('dotenv').config()
@@ -16,13 +16,44 @@ else if(netlifyConfig.build.environment.TOKEN) {
 }
 
 
+
+const commands = [
+    {
+        name: 'ping',
+        description: 'Replies with pong',
+    },
+];
+
+const rest = new REST({ version: '10' }).setToken(token);
+
+
+try {
+    console.log('started refreshing application (/) commands');
+
+    rest.put(Routes.applicationCommands("1133748577622052874"), {body: commands}).then( () => {
+        console.log('okkkk');
+    });
+
+    console.log('successfully reloaded application (/) commands');
+} catch (e) {
+    console.log(`Error: ${e}`);
+}
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+// const channel = await client.channels.cache.get("1133680913398628362");
 
 client.once(Events.ClientReady, c => {
     console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.login(token);
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+
+  if (interaction.commandName === 'ping') {
+    await interaction.reply('Pong!');client.login(token);
+  }
+});
 
 
 const requestListener = function(req, res) {

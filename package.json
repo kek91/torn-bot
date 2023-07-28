@@ -4,7 +4,8 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "dev": "node ."
+    "dev": "node main.js",
+    "build": "echo OK"
   },
   "dependencies": {
     "discord.js": "^14.11.0",
